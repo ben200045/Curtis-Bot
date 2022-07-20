@@ -13,23 +13,21 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-  if message.author == client.user:
-    return
-  if message.content.startswith('$hello'):
-    await message.channel.send('Hello!')
-  
   #Admiration Module
   if message.author.name == 'Jean Pierre Dogé': #Change to 'Pesto'
     if(random.randint(1,5) > 2):       #60% chance of activation
-      time.sleep(random.randint(2,20)) #Response time between 2-20 seconds
-      message_roulette(message)
-      await reaction_roulette(message)
+      sleepTimer = random.randint(2,20)
+      await message_roulette(message, sleepTimer)
+      await reaction_roulette(message, sleepTimer)
 
-async def message_roulette(message):
-  await message.channel.send('Hahahaha')
+async def message_roulette(message, sleepTimer):
+  if(sleepTimer == 2):
+    await message.channel.send('woah, mama mia cunt')
+    return
 
-async def reaction_roulette(message):
+async def reaction_roulette(message, sleepTimer):
   #await message.add_reaction('👍')
+  time.sleep(sleepTimer) #Response time between 2-20 seconds
   for reacts in range(1,4): #Runs 4 times
     time.sleep(0.8)
     await add_react(message)
@@ -41,7 +39,7 @@ async def add_react(message):
   if(reactions == 2):
     await message.add_reaction('😂') # 5% chance
   if(reactions == 3):
-    await message.add_reaction('😅') # 5% chance
+    await message.add_reaction('😳') # 5% chance
   if(reactions == 4):
     await message.add_reaction('😆') # 5% chance
   if(reactions == 5):
