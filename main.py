@@ -2,6 +2,7 @@ import os
 import discord
 import time
 import random
+from keep_alive import keep_alive
 
 my_secret = os.environ['TOKEN']
 client = discord.Client()
@@ -14,7 +15,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
   #Admiration Module
-  if message.author.name == 'Pesto': #Change to 'Pesto'
+  if message.author.id == 152389518375256064: #My Beloved Pestos ID
     if(random.randint(1,5) > 2):       #60% chance of activation
       sleepTimer = random.randint(2,20)
       await message_roulette(message, sleepTimer)
@@ -51,5 +52,7 @@ async def add_react(message):
   else:
     return                           # 65% chance
 
+
+keep_alive()
 client.run(my_secret)
 
